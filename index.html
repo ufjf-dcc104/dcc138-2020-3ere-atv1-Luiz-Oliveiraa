@@ -16,15 +16,22 @@
 
         let ctx = canvas.getContext("2d"); /*Contexto 2d*/
         let x = 100;
-        desenha();
+        let t0;
+        let dt;
+        (desenha);
 
-        function desenha(){
+        function desenha(t){
+            t0= t0 ?? t; // Se t0 for nulo, use o t
+            dt=(t-t0)/1000;
             //DESENHO FUNDO
             ctx.fillStyle = "black";
             ctx.fillRect(0,0,canvas.width,canvas.height);//preencher
             // DESENHO ELEMENTOS
             ctx.fillStyle = "purple";
             ctx.fillRect(x,150,20,20);
+
+            requestAnimationFrame(desenha);
+            t0=t;
         }
         
     </script>
