@@ -12,11 +12,21 @@
     <script>
         let canvas = document.querySelector("canvas");
         canvas.width = 480;
-        canvas.height = 320;     
+        canvas.height = 320;    
 
         let ctx = canvas.getContext("2d"); /*Contexto 2d*/
-        ctx.fillStyle = "black";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
+        let x = 100;
+        desenha();
+
+        function desenha(){
+            //DESENHO FUNDO
+            ctx.fillStyle = "black";
+            ctx.fillRect(0,0,canvas.width,canvas.height);//preencher
+            // DESENHO ELEMENTOS
+            ctx.fillStyle = "purple";
+            ctx.fillRect(x,150,20,20);
+        }
+        
     </script>
 </body>
 </html>
