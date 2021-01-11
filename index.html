@@ -29,8 +29,9 @@
             ctx.fillRect(0,0,canvas.width,canvas.height);//preencher
 
             //ATUALIZA ESTADO
-            x = x+10*dt;
-            y = 100 + 1500 * Math.cos(t/200)*dt;
+            // x = x+10*dt;
+            x = 240 + 1500 * Math.sin(t/200)*dt;
+            y = 160 + 1500 * Math.cos(t/200)*dt;
 
             // DESENHO ELEMENTOS
             ctx.fillStyle = "purple";
