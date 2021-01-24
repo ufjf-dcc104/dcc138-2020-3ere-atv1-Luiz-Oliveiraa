@@ -12,11 +12,12 @@
     <script>
         let canvas = document.querySelector("canvas");
         canvas.width = 480;
-        canvas.height = 320;    
-
+        canvas.height = 320;   
         let ctx = canvas.getContext("2d"); /*Contexto 2d*/
         let x = 100;
+        let vx = 0;     //velocidade em x
         let y = 100;
+        let vy = 0;     //velocidade em y
         let t0;
         let dt;
         requestAnimationFrame(desenha);
@@ -28,10 +29,9 @@
             ctx.fillStyle = "black";
             ctx.fillRect(0,0,canvas.width,canvas.height);//preencher
 
-            //ATUALIZA ESTADO
-            // x = x+10*dt;
-            x = 240 + 1500 * Math.sin(t/200)*dt;
-            y = 160 + 1500 * Math.cos(t/200)*dt;
+            //ATUALIZA DINAMICA DOS ESTADOS
+            x = x +vx *dt;
+            y = y +vy *dt;
 
             // DESENHO ELEMENTOS
             ctx.fillStyle = "purple";
@@ -39,6 +39,29 @@
 
             requestAnimationFrame(desenha);
             t0=t;
+        }
+        addEventListener("keydown", teclaPressionada);
+
+        function teclaPressionada(e){
+            //  ADICIONA CONTROLE DE VELOCIDADES
+            console.log(e.key);     //aparecer teclas pressionadas no "console"
+            switch (e.key) {
+                case "ArrowUp":
+                    vy = -20;
+                    break;
+                case "ArrowDown":
+                    vy = +20;
+                    break;
+                case "ArrowLeft":
+                    vx = -20;
+                    break;
+                case "ArrowRight":
+                    vx = +20;
+                    break;
+            
+                default:
+                    break;
+            }
         }
         
     </script>
