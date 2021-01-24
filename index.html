@@ -16,11 +16,13 @@
         let ctx = canvas.getContext("2d"); /*Contexto 2d*/
         let x = 100;
         let vx = 0;     //velocidade em x
+        let ax = 0;
         let y = 100;
         let vy = 0;     //velocidade em y
+        let ay = 0;
         let t0;
         let dt;
-        const V = 170;
+        const K = 180;
 
         requestAnimationFrame(desenha);
 
@@ -32,8 +34,10 @@
             ctx.fillRect(0,0,canvas.width,canvas.height);//preencher
 
             //ATUALIZA DINAMICA DOS ESTADOS
+            vx = vx +ax*dt;
             x = x +vx *dt;
             y = y +vy *dt;
+            vy = vy +ay*dt;
 
             // DESENHO ELEMENTOS
             ctx.fillStyle = "purple";
@@ -50,16 +54,16 @@
             console.log(e.key);     //aparecer teclas pressionadas no "console"
             switch (e.key) {
                 case "ArrowUp":
-                    vy = -V;
+                    ay = -K;
                     break;
                 case "ArrowDown":
-                    vy = +V;
+                    ay = +K;
                     break;
                 case "ArrowLeft":
-                    vx = -V;
+                    ax = -K;
                     break;
                 case "ArrowRight":
-                    vx = +V;
+                    ax = +K;
                     break;
             }
         }
@@ -70,15 +74,19 @@
             switch (e.key) {
                 case "ArrowUp":
                     vy = 0;
+                    ay = 0;
                     break;
                 case "ArrowDown":
                     vy = 0;
+                    ay = 0;
                     break;
                 case "ArrowLeft":
                     vx = 0;
+                    ax = 0;
                     break;
                 case "ArrowRight":
                     vx = 0;
+                    ax = 0;
                     break;
             }
         }
