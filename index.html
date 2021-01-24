@@ -20,6 +20,8 @@
         let vy = 0;     //velocidade em y
         let t0;
         let dt;
+        const V = 170;
+
         requestAnimationFrame(desenha);
 
         function desenha(t){
@@ -48,16 +50,16 @@
             console.log(e.key);     //aparecer teclas pressionadas no "console"
             switch (e.key) {
                 case "ArrowUp":
-                    vy = -20;
+                    vy = -V;
                     break;
                 case "ArrowDown":
-                    vy = +20;
+                    vy = +V;
                     break;
                 case "ArrowLeft":
-                    vx = -20;
+                    vx = -V;
                     break;
                 case "ArrowRight":
-                    vx = +20;
+                    vx = +V;
                     break;
             }
         }
