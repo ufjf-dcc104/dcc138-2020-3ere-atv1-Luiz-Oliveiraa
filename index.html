@@ -14,14 +14,26 @@
         canvas.width = 480;
         canvas.height = 320;   
         let ctx = canvas.getContext("2d"); /*Contexto 2d*/
-        let x = 100;
+
+        let x = 100;    //posicao em x
         let vx = 0;     //velocidade em x
-        let ax = 0;
-        let y = 100;
+        let ax = 0;     //aceleração em x
+        let y = 100;    //posicao em y
         let vy = 0;     //velocidade em y
-        let ay = 0;
+        let ay = 0;     //aceleração em x
         let t0;
         let dt;
+
+        let ex = 300;    //posicao em x
+        let evx = 0;     //velocidade em x
+        let eax = 0;     //aceleração em x
+        let ey =200;     //posicao em y
+        let evy = 0;     //velocidade em y
+        let eay = 0;     //aceleração em x
+        let et0;
+        let edt;
+
+
         const K = 180;
 
         requestAnimationFrame(desenha);
@@ -33,15 +45,27 @@
             ctx.fillStyle = "black";
             ctx.fillRect(0,0,canvas.width,canvas.height);//preencher
 
+            //CONTROLADORES
+            eay = 0.5*(y - ey) - 0.2*evy;
+            eax = 0.5*(x - ex) - 0.2*evx;
+
             //ATUALIZA DINAMICA DOS ESTADOS
             vx = vx +ax*dt;
             x = x +vx *dt;
             y = y +vy *dt;
             vy = vy +ay*dt;
 
+            evx = evx +eax*dt;
+            ex = ex +evx *dt;
+            ey = ey +evy *dt;
+            evy = evy +eay*dt;
+
             // DESENHO ELEMENTOS
             ctx.fillStyle = "purple";
             ctx.fillRect(x,y,20,20);
+
+            ctx.fillStyle = "red";
+            ctx.fillRect(ex,ey,20,20);
 
             requestAnimationFrame(desenha);
             t0=t;
