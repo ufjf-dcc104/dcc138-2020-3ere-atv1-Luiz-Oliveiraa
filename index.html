@@ -30,18 +30,22 @@
             mover: moverElemento
         };
 
-        let e = {
-            x : 300,
-            vx : 0,     //velocidade em x
-            ax : 0,     //aceleração em x
-            y : 200,     //posicao em y
-            vy : 0,     //velocidade em y
-            ay : 0,    //aceleração em x
-            cor: "red",
-            desenhar: desenharElemento,
-            mover: moverElemento,
-            controlar: perseguirAlvo
-        };        
+        const sprites = [];
+            for (let ne = 0; ne < 20; ne++) {
+                let e = {
+                x : canvas.width * Math.random(),   //posicao em x
+                vx : 0,     //velocidade em x
+                ax : 0,     //aceleração em x
+                y : canvas.height * Math.random(),     //posicao em y
+                vy : 0,     //velocidade em y
+                ay : 0,    //aceleração em x
+                cor: "red",
+                desenhar: desenharElemento,
+                mover: moverElemento,
+                controlar: perseguirAlvo
+            }; 
+            sprites.push(e);
+        }     
 
         let t0;
         let dt;
@@ -55,18 +59,20 @@
             //DESENHO FUNDO
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, canvas.width, canvas.height);//preencher
-
-            //CONTROLADORES
-            // e.controlar({x:250, y:120});
-            e.controlar(p);
-
-            //ATUALIZA DINAMICA DOS ESTADOS
+            
             p.mover();
-            e.mover();
-
-            // DESENHO ELEMENTOS
             p.desenhar();
-            e.desenhar();
+
+            for (let s = 0; s < sprites.length; s++) {
+                const sprite = sprites[s];
+                //CONTROLADORES
+                // sprite.controlar({x:250, y:120});
+                sprite.controlar(p);
+                //ATUALIZA DINAMICA DOS ESTADOS
+                sprite.mover();
+                // DESENHO ELEMENTOS
+                sprite.desenhar();      
+            }            
 
             requestAnimationFrame(desenha);
             t0 = t;
