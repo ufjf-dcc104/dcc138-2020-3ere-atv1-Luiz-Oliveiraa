@@ -17,6 +17,7 @@
         let ctx = canvas.getContext("2d"); /*Contexto 2d*/
         canvas.width = 480;
         canvas.height = 320;
+
         let p = {
             x: 150,    //posicao em x
             vx: 0,     //velocidade em x
@@ -24,10 +25,9 @@
             y: 100,    //posicao em y
             vy: 0,     //velocidade em y
             ay: 0,      //aceleração em x
-            desenhar: function(){
-                ctx.fillStyle = "purple";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            cor: "white",
+            desenhar: desenharElemento,       
+            mover: moverElemento
         };
 
         let e = {
@@ -37,10 +37,9 @@
             y : 200,     //posicao em y
             vy : 0,     //velocidade em y
             ay : 0,    //aceleração em x
-            desenhar: function(){
-                ctx.fillStyle = "red";
-                ctx.fillRect(this.x, this.y, 20, 20);
-            }
+            cor: "red",
+            desenhar: desenharElemento,
+            mover: moverElemento
         };        
 
         let t0;
@@ -61,10 +60,7 @@
             e.ax = 0.5 * (p.x - e.x) - 0.2 * e.vx;
 
             //ATUALIZA DINAMICA DOS ESTADOS
-            p.vx = p.vx + p.ax * dt;
-            p.x = p.x + p.vx * dt;
-            p.y = p.y + p.vy * dt;
-            p.vy = p.vy + p.ay * dt;
+            p.mover();
 
             e.vx = e.vx + e.ax * dt;
             e.x = e.x + e.vx * dt;
@@ -78,6 +74,18 @@
             requestAnimationFrame(desenha);
             t0 = t;
         }
+
+        function moverElemento(){
+            this.vx = this.vx + this.ax * dt;
+            this.x = this.x + this.vx * dt;
+            this.y = this.y + this.vy * dt;
+            this.vy = this.vy + this.ay * dt;
+        }
+        function desenharElemento (){
+            ctx.fillStyle = this.cor;
+            ctx.fillRect(this.x, this.y, 20, 20);
+        }
+
         addEventListener("keydown", teclaPressionada);
         addEventListener("keyup", teclaSolta);
 
