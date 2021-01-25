@@ -33,8 +33,8 @@
         const sprites = [];
             for (let ne = 0; ne < 20; ne++) {
                 let e = {
-                x : canvas.width * Math.random(),   //posicao em x
-                vx : 0,     //velocidade em x
+                x : canvas.width * (1 + 10 * Math.random()),   //posicao em x
+                vx : -20,     //velocidade em x
                 ax : 0,     //aceleração em x
                 y : canvas.height * Math.random(),     //posicao em y
                 vy : 0,     //velocidade em y
@@ -109,8 +109,8 @@
             ctx.fillRect(this.x, this.y, 20, 20);
         }
         function perseguirAlvo(alvo){
-            this.ay = 0.5 * (alvo.y - this.y) - 0.2 * this.vy;
-            this.ax = 0.5 * (alvo.x - this.x) - 0.2 * this.vx;
+            this.ay = 100 * Math.sign(alvo.y - this.y) - 0.2 * this.vy;
+            this.ax = 100 * Math.sign(alvo.x - this.x) - 0.2 * this.vx;
         }
         function evitarAlvo(alvo){
             this.ay = -0.5 * (alvo.y - this.y) - 0.2 * this.vy;
