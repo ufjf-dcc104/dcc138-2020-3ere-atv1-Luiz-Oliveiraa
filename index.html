@@ -45,7 +45,27 @@
                 controlar: perseguirAlvo
             }; 
             sprites.push(e);
-        }     
+        }  
+        
+        let o = {
+            x: -1000,    //posicao em x
+            vx: 0,     //velocidade em x
+            ax: 0,     //aceleração em x
+            y: 150,    //posicao em y
+            vy: 0,     //velocidade em y
+            ay: 0,      //aceleração em x
+            cor: "blue",
+            desenhar: desenharElemento,       
+            mover: moverElemento,
+            controlar: function(){
+                if( this.x>canvas.width + 60){
+                    this.x = -1000;
+                    this.ax = 0;
+                    this.vx = 0;
+                }
+            }
+        };
+        sprites.push(o);
 
         let t0;
         let dt;
@@ -67,9 +87,9 @@
                 const sprite = sprites[s];
                 //CONTROLADORES
                 // sprite.controlar({x:250, y:120});
-                sprite.controlar(p);
+                if (sprite.controlar) sprite.controlar(p);
                 //ATUALIZA DINAMICA DOS ESTADOS
-                sprite.mover();
+                sprite.mover?.();
                 // DESENHO ELEMENTOS
                 sprite.desenhar();      
             }            
@@ -124,21 +144,25 @@
             console.log(event.key);     //aparecer teclas pressionadas no "console"
             switch (event.key) {
                 case "ArrowUp":
-                    // p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowDown":
-                    // p.vy = 0;
                     p.ay = 0;
                     break;
                 case "ArrowLeft":
-                    // p.vx = 0;
                     p.ax = 0;
                     break;
                 case "ArrowRight":
-                    // p.vx = 0;
                     p.ax = 0;
                     break;
+                case " ":
+                    if(o.x === -1000){
+                        o.x = p.x;
+                        o.y = p.y;
+                        o.vx = 200;
+                        o.ax = 100;
+                    }
+                break;
             }
         }
 
